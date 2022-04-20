@@ -40,6 +40,11 @@ class Hand{
         return this.cardCount;
     }
 
+    addCards(inputCardList){
+        this.cardCount += inputCardList.length;
+        this.cardList =[...this.cardList, ...inputCardList];
+    }
+
     drawFrom(Deck, amount){
         for (let i = 0; i < amount; i++){
             this.cardList.push(Deck.removeCard(getRandomInt(Deck.cardCount)));
@@ -69,13 +74,26 @@ class Collection{
         return this.cardCount;
     }
 
-    pickFrom(hand, amount){
+    pickCards(hand, amount){
         for (let i = 0; i < amount; i++){
             const theCard = hand.removeCard(getRandomInt(hand.cardCount));
             this.cardList.push(theCard);
             this.tally[theCard.name] += 1;
         }
         this.cardCount += amount;
+    }
+
+    pickByIndex(hand, index){
+        const theCard = hand.removeCard(index);
+        this.cardList.push(theCard);
+        this.cardCount += 1;
+        this.tally[theCard.name] += 1;
+    }
+
+    addCards(inputCardList){
+        this.cardCount += inputCardList.length;
+        this.cardList =[...this.cardList, ...inputCardList];
+        inputCardList.forEach(card => this.tally[card.name] += 1);
     }
 
     calculateScore(){

@@ -8,7 +8,7 @@ export default function Home() {
     <Layout>
       <Head>
         <title>Sushi Go Game</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/sushiicon.png" />
         <meta charset="utf-8" />
       </Head>
 
@@ -25,41 +25,6 @@ export default function Home() {
       <footer>
         <p>Created with &#128153; by Qingyi Wang</p>
       </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          row-gap: 24px;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: #20627e;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: Cabin, Helvetica Neue,
-            sans-serif;
-        }
-      `}</style>
     </Layout>
   )
 }

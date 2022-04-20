@@ -1,0 +1,18 @@
+.container{
+    height: 220px;
+    width: 140px;
+    display: grid;
+    justify-items: center;
+    padding: 16px 10px 0 10px;
+    border: 1px solid #20627e;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.text{
+    margin: 0;
+}
+
+.img{
+    border-radius: 0.25rem;
+}

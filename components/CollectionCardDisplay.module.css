@@ -1,0 +1,14 @@
+.container{
+    height: 220px;
+    width: 140px;
+    display: grid;
+    justify-items: center;
+    padding: 16px 10px 0 10px;
+    border: 1px solid #20627e;
+    border-radius: 0.25rem;
+    background-color: #F5F5F5;
+}
+
+.text{
+    margin: 0;
+}
