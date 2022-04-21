@@ -5,6 +5,8 @@ import CardDisplay from '../../components/CardDisplay';
 import CollectionCardDisplay from '../../components/CollectionCardDisplay';
 import CurrentHandContainer from '../../components/CurrentHandContainer.js';
 import CurrentCollectionContainer from '../../components/CurrentCollectionContainer.js';
+import OpponentsContainer from '../../components/OpponentsContainer.js';
+import OpponentDisplay from '../../components/OpponentDisplay.js';
 import {Card, Deck, Hand, Collection, getRandomInt} from '../../components/simulatorCode';
 import 'bootstrap/dist/css/bootstrap.css'
 import {useState, useEffect, useRef} from 'react';
@@ -16,20 +18,15 @@ export default function StartGame() {
     const [currentCollection, setCurrentCollection] = useState(new Collection());
     const [allHands, setAllHands] = useState([]);
     const [cardsUsed, setCardsUsed] = useState(0);
+    const [opponentHands, setOpponentHands] = useState([]);
+    const [opponentCollections, setOpponentCollections] = useState([new Collection(), new Collection(), new Collection()]);
     const firstRender = useRef(true);
+
+    console.log(firstRender.current);
 
     useEffect(() => {
         initializeHands();
     },[]);
-
-    useEffect(() => {
-        if (firstRender.current){
-            firstRender.current = false;
-        }
-        else{
-            rotateHands();
-        }
-    },[cardsUsed]);
 
     function initializeHands(){
         const nigiriCard = new Card('nigiri','/salmon.png');
@@ -53,24 +50,36 @@ export default function StartGame() {
         hand3.drawFrom(initialDeck, 8);
         hand4.drawFrom(initialDeck, 8);
         setCurrentHand(hand1);
+        setOpponentHands([hand2, hand3, hand4]);
         setAllHands([hand1, hand2, hand3, hand4]);
     }
 
     function rotateHands(){
-        console.log("allHandsBeforePop");
-        console.log(allHands);
-        allHands.unshift(allHands.pop());
-        const newAllHands = allHands;
-        setAllHands(newAllHands);
+        // console.log(allHands);
+        let newHands = allHands;
+        newHands.unshift(newHands.pop());
+        setAllHands(newHands);
         setCurrentHand(allHands[0]);
-        console.log("currentHand");
-        console.log(currentHand);
-        console.log("allHands");
-        console.log(allHands);
+        setOpponentHands(allHands.slice(1));
     }
 
-    
-
+    function generateOpponents(){
+        let returnArray = [];
+        opponentHands.forEach((hand,index) => {
+            returnArray.push(
+                <OpponentDisplay
+                    key={index}
+                    indexValue={index}
+                    opponentCollections={opponentCollections}
+                    setOpponentCollections={setOpponentCollections}
+                    opponentHands={opponentHands}
+                    setOpponentHands={setOpponentHands}
+                    cardsUsed={cardsUsed}
+                />
+            );
+        })
+        return returnArray;
+    }
 
     function generateCards(){
         let returnArray = [];
@@ -113,31 +122,38 @@ export default function StartGame() {
 
 
     return (
-    <Layout>
-        <Head>
-            <title>Sushi Go Game</title>
-            <link rel="icon" href="/sushiicon.png" />
-            <meta charset="utf-8" />
-        </Head>
+        <Layout>
+            <Head>
+                <title>Sushi Go Game</title>
+                <link rel="icon" href="/sushiicon.png" />
+                <meta charset="utf-8" />
+            </Head>
 
-        <main>
-            <h1>Let's play Sushi Go!</h1>
+            <main>
+                <h1>Let's play Sushi Go!</h1>
 
-            <CurrentHandContainer>
-                {generateCards()}
-            </CurrentHandContainer>
+                <OpponentsContainer>
+                    {generateOpponents()}
+                </OpponentsContainer>
 
-            <CurrentCollectionContainer points={currentCollection.calculateScore()}>
-                {generateCollection()}
-            </CurrentCollectionContainer>
+                <CurrentHandContainer>
+                    {generateCards()}
+                </CurrentHandContainer>
 
-            <Link href = "/">
-                <button className="btn btn-primary">Back to main menu</button>
-            </Link>
-        </main>
-        <footer>
-            <p>Created with &#128153; by Qingyi Wang</p>
-        </footer>
-    </Layout>
+                <button onClick={rotateHands}>Rotate</button>
+
+                <CurrentCollectionContainer points={currentCollection.calculateScore()}>
+                    {generateCollection()}
+                </CurrentCollectionContainer>
+
+                <Link href = "/">
+                    <button className="btn btn-primary">Back to main menu</button>
+                </Link>
+            </main>
+
+            <footer>
+                <p>Created with &#128153; by Qingyi Wang</p>
+            </footer>
+        </Layout>
     )
 }

@@ -5,17 +5,16 @@ import {Card, Deck, Hand, Collection, getRandomInt} from '../components/simulato
 
 export default function CardDisplay(props) {
     const claimCard = (e) => {
+        console.log(`I am myself, and I will pick from the pile that contains ${props.currHandCards.length}`);
+        console.log(props.currHandCards);
         let newHand = new Hand();
         newHand.addCards(props.currHandCards);
         let newCollection = new Collection();
         newCollection.addCards(props.currCollectionCards);
         newCollection.pickByIndex(newHand, props.indexValue);
-        console.log("passedInAllHands");
-        console.log(props.allHands);
         let newAllHands = props.allHands;
         newAllHands[0].removeCard(props.indexValue);
         props.setAllHands(newAllHands);
-
         props.setCurrHand(newHand);
         props.setCurrCollection(newCollection);
         props.setCardsUsed(props.cardsUsed + 1);
