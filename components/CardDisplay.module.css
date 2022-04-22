@@ -9,6 +9,12 @@
     cursor: pointer;
 }
 
+/** Reference: https://stackoverflow.com/questions/51549115/best-way-to-disabled-div-onclick-in-react **/
+.container[disabled]{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .text{
     margin: 0;
 }

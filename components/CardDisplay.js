@@ -22,7 +22,7 @@ export default function CardDisplay(props) {
     }
 
     return(
-        <div className = {styles.container} onClick={claimCard} tabIndex="0">
+        <div className = {styles.container} onClick={claimCard} tabIndex="0" disabled={props.shouldRotate}>
             <Image
                 src={props.thisCard.img_url}
                 alt={`Picture of ${props.thisCard.name} Card`}

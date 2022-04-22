@@ -35,7 +35,7 @@ export default function StartGame() {
             setInGame(false);
         }
     },[cardsUsed])
-    
+
 
     function initializeHands(){
         const nigiriCard = new Card('nigiri','/salmon.png');
@@ -111,6 +111,7 @@ export default function StartGame() {
                 allHands={allHands}
                 setAllHands={setAllHands}
                 setShouldRotate={setShouldRotate}
+                shouldRotate={shouldRotate}
                 />
             );
         })
