@@ -39,6 +39,7 @@ export default function StartGame() {
 
 
     function initializeHands(){
+        // Distribute a fresh deck of cards
         const nigiriCard = new Card('nigiri','/salmon.png');
         const sashimiCard = new Card('sashimi','/sashimi.png');
         const tempuraCard = new Card('tempura','/tempura.png');

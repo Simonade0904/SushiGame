@@ -1,4 +1,5 @@
 import styles from './GameResults.module.css';
+import Router from 'next/router';
 
 export default function GameResults(props){
     const isWin = () => {
@@ -19,10 +20,14 @@ export default function GameResults(props){
         }
     }
 
+    const refresh = () => {
+        Router.reload('./game/start-game');
+    }
+
     return(
         <div className={styles.container}>
             {isWin()}
-            <button className='btn btn-primary'>Play again</button>
+            <button className='btn btn-primary' onClick={refresh}>Play again</button>
         </div>
     )
 }
