@@ -14,7 +14,7 @@ import {useState, useEffect, useRef} from 'react';
 export default function StartGame() {
 
     const [currentHand, setCurrentHand] = useState(new Hand());
-    const [inGame, setInGame] = useState(false);
+    const [inGame, setInGame] = useState(true);
     const [currentCollection, setCurrentCollection] = useState(new Collection());
     const [allHands, setAllHands] = useState([]);
     const [cardsUsed, setCardsUsed] = useState(0);
@@ -29,6 +29,13 @@ export default function StartGame() {
     useEffect(() => {
         initializeHands();
     },[]);
+
+    useEffect(() => {
+        if (cardsUsed === 8){
+            setInGame(false);
+        }
+    },[cardsUsed])
+    
 
     function initializeHands(){
         const nigiriCard = new Card('nigiri','/salmon.png');
@@ -124,7 +131,24 @@ export default function StartGame() {
         return returnArray;
     }
 
-    
+    function showGameControlOrResults(){
+        if (inGame){
+            return (
+                    <>
+                        <CurrentHandContainer>
+                            {generateCards()}
+                        </CurrentHandContainer>
+                        <button className = "btn btn-primary" onClick={rotateHands} disabled={!shouldRotate}>Rotate</button>
+                        <p>{shouldRotate ? "Time to rotate your hands!": "Don't rotate hands yet. Pick a card first!"}</p>
+                    </>
+            );
+        }
+        else {return(
+                    <>
+
+                    </>
+        )};
+    }
 
 
     return (
@@ -142,12 +166,7 @@ export default function StartGame() {
                     {generateOpponents()}
                 </OpponentsContainer>
 
-                <CurrentHandContainer>
-                    {generateCards()}
-                </CurrentHandContainer>
-
-                <button className = "btn btn-primary" onClick={rotateHands} disabled={!shouldRotate}>Rotate</button>
-                <p>{shouldRotate ? "Time to rotate your hands!": "Don't rotate hands yet. Pick a card first!"}</p>
+                {showGameControlOrResults()}
 
                 <CurrentCollectionContainer points={currentCollection.calculateScore()}>
                     {generateCollection()}
