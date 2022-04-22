@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import {useEffect, useRef} from 'react'
+import styles from './OpponentDisplay.module.css'
 
 export default function OpponentDisplay(props){
 
@@ -40,8 +41,10 @@ export default function OpponentDisplay(props){
     
     return(
         <div>
-            <p>Opponent {props.indexValue}</p>
-            {generateOpponentCards()}
+            <p>Opponent {props.indexValue}: Currently has {props.opponentCollections[props.indexValue].calculateScore()} points.</p>
+            <div className={styles.container}>
+                {generateOpponentCards()}
+            </div>
         </div>
     )
 }

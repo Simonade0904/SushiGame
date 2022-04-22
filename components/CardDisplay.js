@@ -18,6 +18,7 @@ export default function CardDisplay(props) {
         props.setCurrHand(newHand);
         props.setCurrCollection(newCollection);
         props.setCardsUsed(props.cardsUsed + 1);
+        props.setShouldRotate(true);
     }
 
     return(

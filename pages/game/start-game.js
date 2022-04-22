@@ -20,6 +20,8 @@ export default function StartGame() {
     const [cardsUsed, setCardsUsed] = useState(0);
     const [opponentHands, setOpponentHands] = useState([]);
     const [opponentCollections, setOpponentCollections] = useState([new Collection(), new Collection(), new Collection()]);
+    const [shouldRotate, setShouldRotate] = useState(false);
+
     const firstRender = useRef(true);
 
     console.log(firstRender.current);
@@ -61,6 +63,7 @@ export default function StartGame() {
         setAllHands(newHands);
         setCurrentHand(allHands[0]);
         setOpponentHands(allHands.slice(1));
+        setShouldRotate(false);
     }
 
     function generateOpponents(){
@@ -100,6 +103,7 @@ export default function StartGame() {
                 setCardsUsed={setCardsUsed}
                 allHands={allHands}
                 setAllHands={setAllHands}
+                setShouldRotate={setShouldRotate}
                 />
             );
         })
@@ -119,6 +123,8 @@ export default function StartGame() {
         })
         return returnArray;
     }
+
+    
 
 
     return (
@@ -140,14 +146,15 @@ export default function StartGame() {
                     {generateCards()}
                 </CurrentHandContainer>
 
-                <button onClick={rotateHands}>Rotate</button>
+                <button className = "btn btn-primary" onClick={rotateHands} disabled={!shouldRotate}>Rotate</button>
+                <p>{shouldRotate ? "Time to rotate your hands!": "Don't rotate hands yet. Pick a card first!"}</p>
 
                 <CurrentCollectionContainer points={currentCollection.calculateScore()}>
                     {generateCollection()}
                 </CurrentCollectionContainer>
 
                 <Link href = "/">
-                    <button className="btn btn-primary">Back to main menu</button>
+                    <button className="btn btn-secondary">Back to main menu</button>
                 </Link>
             </main>
 
