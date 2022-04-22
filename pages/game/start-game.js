@@ -7,6 +7,7 @@ import CurrentHandContainer from '../../components/CurrentHandContainer.js';
 import CurrentCollectionContainer from '../../components/CurrentCollectionContainer.js';
 import OpponentsContainer from '../../components/OpponentsContainer.js';
 import OpponentDisplay from '../../components/OpponentDisplay.js';
+import GameResults from '../../components/GameResults.js';
 import {Card, Deck, Hand, Collection, getRandomInt} from '../../components/simulatorCode';
 import 'bootstrap/dist/css/bootstrap.css'
 import {useState, useEffect, useRef} from 'react';
@@ -144,10 +145,13 @@ export default function StartGame() {
                     </>
             );
         }
-        else {return(
-                    <>
-
-                    </>
+        else {
+            console.log('I tried returning gameresults!')
+            return(
+                    <GameResults
+                        currentCollection={currentCollection}
+                        opponentCollections={opponentCollections}
+                    />
         )};
     }
 
