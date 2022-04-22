@@ -2,7 +2,8 @@
 
 ## To play:
 
-Please navigate to the github page for this event, and follow the instructions on the interface.
+This project is deployed using Vercel.
+Please navigate to https://sushi-game.vercel.app/ for this event, and follow the instructions on the interface.
 
 ## To inspect source code:
 
