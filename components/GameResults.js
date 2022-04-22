@@ -1,3 +1,5 @@
+import styles from './GameResults.module.css';
+
 export default function GameResults(props){
     const isWin = () => {
         const myScore = props.currentCollection.calculateScore();
@@ -18,8 +20,9 @@ export default function GameResults(props){
     }
 
     return(
-        <div>
+        <div className={styles.container}>
             {isWin()}
+            <button className='btn btn-primary'>Play again</button>
         </div>
     )
 }
